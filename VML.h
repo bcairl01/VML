@@ -1,13 +1,17 @@
-/// @file 	RobotLibCorevml_VectoMath.h
-///	@brief	A set matix/vector operations geared toward robotics applications.
+/// @file 	VML.h
+///	@brief	Vector-Math Library. Meant to be like eigen for C.
 ///
-/// @defgroup vml_Vector3
-/// @defgroup vml_Matrix3
+///	@todo
+///	
+/// @defgroup vml_Vector
+/// @defgroup vml_Matrix
 /// @defgroup vml_Transform
+
 
 #ifndef VECTORMATHLIB_H
 #define VECTORMATHLIB_H
 #define VML_API
+
 
 #ifndef VML_DEBUG_LEVEL
 #define VML_DEBUG_LEVEL 0UL
@@ -51,7 +55,6 @@ typedef double*	vmlTy_dp;
 	#include 	<math.h>
 #endif
 
-
 #if	VML_WITH_OPENGL
 	#if _WIN32 || _WIND64
 	#include	"Windows.h"
@@ -60,12 +63,8 @@ typedef double*	vmlTy_dp;
 	#include	<GL/freeglut.h>
 #endif
 
-
-
 #include		<stdlib.h>
-#include		"RobotLibCore/RobotLibCoreConstants.h"
-#include		"RobotLibCore/RobotLibCoreTypedefs.h"
-#include		"RobotLibCore/RobotLibCoreUtils.h"
+
 
 
 
@@ -224,36 +223,36 @@ typedef double*	vmlTy_dp;
 /// @{
 
 	/// @brief Gets vector X-component
-	#define rVec_X(vec) 	vec[0UL]
+	#define vml_X(vec) 	vec[0UL]
 
 	/// @brief Gets vector Y-component
-	#define rVec_Y(vec) 	vec[1UL]
+	#define vml_Y(vec) 	vec[1UL]
 
 	/// @brief Gets vector Z-component
-	#define rVec_Z(vec) 	vec[2UL]
+	#define vml_Z(vec) 	vec[2UL]
 
 
 	VML_API void 	vml_VectorSetEq( vmlTy_p vecOUT, vmlTy_p vecIN, VSS_1 );
 	VML_API void 	vml_VectorSetEqD2S( vmlTy_p vecOUT, vmlTy_dp vecIN, VSS_1 );
 	VML_API void 	vml_VectorNegate( vmlTy_p vecOUT, vmlTy_p vecIN, VSS_1 );
 	VML_API void 	vml_VectorAdd( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
-	VML_API void 	vml_VectorAddC( vmlTy_p vecOUT, vmlTy_p vecINA, VSS_1 );
+	VML_API void 	vml_VectorAddIPL( vmlTy_p vecOUT, vmlTy_p vecINA, VSS_1 );
 	VML_API void 	vml_VectorScaleAdd( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, rF32* scale, VSS_1 );
-	VML_API void 	vml_VectorScaleAddC( vmlTy_p vecOUT, vmlTy_p vecINA, rF32* scale, VSS_1 );
+	VML_API void 	vml_VectorScaleAddIPL( vmlTy_p vecOUT, vmlTy_p vecINA, rF32* scale, VSS_1 );
 	VML_API void 	vml_VectorSub( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
-	VML_API void	vml_VectorSubC( vmlTy_p vecOUT, vmlTy_p vecINA, VSS_1 );
+	VML_API void	vml_VectorSubIPL( vmlTy_p vecOUT, vmlTy_p vecINA, VSS_1 );
 	VML_API void 	vml_VectorScaleSub( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, rF32* scale, VSS_1 );
-	VML_API void 	vml_VectorScaleSubC( vmlTy_p vecOUT, vmlTy_p vecINA, rF32* scale, VSS_1 );
+	VML_API void 	vml_VectorScaleSubIPL( vmlTy_p vecOUT, vmlTy_p vecINA, rF32* scale, VSS_1 );
 	VML_API void 	vml_VectorEMult( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API void 	vml_VectorEDiv( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API void 	vml_VectorESig( vmlTy_p vecOUT, vmlTy_p vecINA, VSS_1 );
 	VML_API void 	vml_VectorScale( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 *scale, VSS_1 ); 
-	VML_API void 	vml_VectorScaleC( vmlTy_p vecOUT, rF32 *scale, VSS_1 );
+	VML_API void 	vml_VectorScaleIPL( vmlTy_p vecOUT, rF32 *scale, VSS_1 );
 	VML_API void 	vml_VectorScaleNR( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 scale, VSS_1 );
 	VML_API void 	vml_VectorScaleCNR( vmlTy_p vecOUT, rF32 scale, VSS_1 );
 	VML_API void 	vml_VectorScaleDiv( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 *scale, VSS_1 ); 
 	VML_API void 	vml_VectorShift( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 shift, VSS_1 );
-	VML_API void 	vml_VectorShiftC( vmlTy_p vecOUT, rF32 shift, VSS_1 );	
+	VML_API void 	vml_VectorShiftIPL( vmlTy_p vecOUT, rF32 shift, VSS_1 );	
 	VML_API rF32 	vml_VectorDot( vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API rF32 	vml_VectorAllignment( vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API rF32 	vml_VectorNorm( vmlTy_p vecIN,  rF32 order, VSS_1 );
@@ -261,23 +260,23 @@ typedef double*	vmlTy_dp;
 	VML_API rF32 	vml_VectorL1Diff( vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API rF32	vml_VectorL2Diff( vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API rF32 	vml_VectorNormalize( vmlTy_p vecOUT, vmlTy_p vecIN, VSS_1 );
-	VML_API rF32 	vml_VectorNormalizeC( vmlTy_p vecOUT, VSS_1 );
+	VML_API rF32 	vml_VectorNormalizeIPL( vmlTy_p vecOUT, VSS_1 );
 	VML_API rF32 	vml_VectorNormalizeDiff( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB, VSS_1 );
 	VML_API void 	vml_VectorMaskMax( vmlTy_p vecOUT, vmlTy_p vecIN, VSS_1 );
-	VML_API void 	vml_VectorMaskMaxC( vmlTy_p vecOUT, VSS_1 );
+	VML_API void 	vml_VectorMaskMaxIPL( vmlTy_p vecOUT, VSS_1 );
 	VML_API void 	vml_VectorMaskMin( vmlTy_p vecOUT, vmlTy_p vecIN, VSS_1 );
-	VML_API void 	vml_VectorMaskMinC( vmlTy_p vecOUT, VSS_1 );
+	VML_API void 	vml_VectorMaskMinIPL( vmlTy_p vecOUT, VSS_1 );
 	VML_API void 	vml_VectorCross( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB , VSS_1 );
 	VML_API rF32 	vml_VectorTriple( vmlTy_p vecINA, vmlTy_p vecINB, vmlTy_p vecINC, VSS_1 );
 	VML_API void 	vml_VectorAverage( vmlTy_p vecOUT, vmlTy_p vecINA, vmlTy_p vecINB , VSS_1 );
 	VML_API void 	vml_VectorAbs( vmlTy_p vecOUT, vmlTy_p vecINA , VSS_1 );
-	VML_API void 	vml_VectorAbsC( vmlTy_p vecOUT, VSS_1 );
+	VML_API void 	vml_VectorAbsIPL( vmlTy_p vecOUT, VSS_1 );
 	VML_API void 	vml_VectorXRotation( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 *angle, VSS_1 );
 	VML_API void 	vml_VectorYRotation( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 *angle, VSS_1 );
 	VML_API void 	vml_VectorZRotation( vmlTy_p vecOUT, vmlTy_p vecIN, rF32 *angle, VSS_1 );
-	VML_API void 	vml_VectorXRotationC( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
-	VML_API void 	vml_VectorYRotationC( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
-	VML_API void 	vml_VectorZRotationC( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
+	VML_API void 	vml_VectorXRotationIPL( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
+	VML_API void 	vml_VectorYRotationIPL( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
+	VML_API void 	vml_VectorZRotationIPL( vmlTy_p vecOUT, rF32 *angle, VSS_1 );
 	VML_API void 	vml_VectorLoadZeros( vmlTy_p vecOUT, VSS_1 );
 	VML_API void 	vml_VectorLoadPolar( vmlTy_p vecOUT, rF32* theta, rF32* alpha, VSS_1 );
 	VML_API void 	vml_VectorLoadPolar90a( vmlTy_p vecOUT, rF32* theta, rF32* alpha, VSS_1 );
@@ -345,10 +344,10 @@ typedef double*	vmlTy_dp;
 	VML_API void	vml_MatrixLoadRand( vmlTy_p matOUT, MSS_1 );
 	VML_API void 	vml_MatrixAdd( vmlTy_p matOUT, vmlTy_p matINA, vmlTy_p matINB, MSS_1 );
 	VML_API void 	vml_MatrixSub( vmlTy_p matOUT, vmlTy_p matINA, vmlTy_p matINB, MSS_1 );
-	VML_API void 	vml_MatrixAddC( vmlTy_p matOUT, vmlTy_p matIN, MSS_1 );
-	VML_API void 	vml_MatrixSubC( vmlTy_p matOUT, vmlTy_p matIN, MSS_1 );
-	VML_API void 	vml_MatrixScaleAddC( vmlTy_p matOUT, vmlTy_p matIN, rF32* scale, MSS_1 );
-	VML_API void 	vml_MatrixScaleSubC( vmlTy_p matOUT, vmlTy_p matIN, rF32* scale, MSS_1 );
+	VML_API void 	vml_MatrixAddIPL( vmlTy_p matOUT, vmlTy_p matIN, MSS_1 );
+	VML_API void 	vml_MatrixSubIPL( vmlTy_p matOUT, vmlTy_p matIN, MSS_1 );
+	VML_API void 	vml_MatrixScaleAddIPL( vmlTy_p matOUT, vmlTy_p matIN, rF32* scale, MSS_1 );
+	VML_API void 	vml_MatrixScaleSubIPL( vmlTy_p matOUT, vmlTy_p matIN, rF32* scale, MSS_1 );
 	
 	VML_API void 	vml_Matrix3LoadSkew( vml_Matrix3 matOUT, vml_Vector3 vecIN );
 	VML_API void 	vml_Matrix3LoadYRot( vml_Matrix3 matOUT, rF32 angle );
@@ -389,7 +388,7 @@ typedef double*	vmlTy_dp;
 	VML_API void rIHV_Mult( vml_Vector3 vecOUT, vml_Transform *homIN, vml_Vector3 vecIN  );
 	VML_API void rHH_Mult( vml_Transform *homOUT, vml_Transform *homINA, vml_Transform *homINB );
 	VML_API void rIHH_Mult( vml_Transform *homOUT, vml_Transform *homINA, vml_Transform *homINB );	
-	VML_API void rIHH_Mult_NC( vml_Transform *homOUT, vml_Transform *homINA, vml_Transform *homINB );	
+	VML_API void rIHH_Mult_NIPL( vml_Transform *homOUT, vml_Transform *homINA, vml_Transform *homINB );	
 
 /// @}
 	
